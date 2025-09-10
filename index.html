@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación de Madurez Digital - Sistemas de Información</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <h1 class="navbar-title">🏢 Madurez Digital SI</h1>
+                <div class="navbar-actions">
+                    <button id="homeBtn" class="btn btn--outline btn--sm">Inicio</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="homePage" class="page active">
+        <div class="container">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1>Evaluación de Madurez Digital</h1>
+                    <h2>Sistemas de Información</h2>
+                    <p class="hero-subtitle">Descubra el nivel de transformación digital de su organización y obtenga un plan de acción personalizado para avanzar al siguiente nivel.</p>
+                    <button id="startEvaluationBtn" class="btn btn--primary btn--lg">Comenzar Evaluación</button>
+                </div>
+            </div>
+
+            <div class="maturity-levels">
+                <h3>Modelo de 5 Niveles de Madurez Digital</h3>
+                <div class="levels-grid">
+                    <div class="level-card" data-level="1">
+                        <div class="level-number" style="background-color: #ef4444;">1</div>
+                        <h4>Reactivo</h4>
+                        <p>Tecnología solo para resolver problemas urgentes. Sin estrategia clara.</p>
+                    </div>
+                    <div class="level-card" data-level="2">
+                        <div class="level-number" style="background-color: #f97316;">2</div>
+                        <h4>Eficiencia</h4>
+                        <p>Automatización de procesos existentes. Enfoque en reducción de costes.</p>
+                    </div>
+                    <div class="level-card" data-level="3">
+                        <div class="level-number" style="background-color: #eab308;">3</div>
+                        <h4>Integración</h4>
+                        <p>Sistemas conectados. Datos compartidos entre departamentos.</p>
+                    </div>
+                    <div class="level-card" data-level="4">
+                        <div class="level-number" style="background-color: #22c55e;">4</div>
+                        <h4>Innovación</h4>
+                        <p>Tecnología habilita nuevos productos y servicios. Experimentación activa.</p>
+                    </div>
+                    <div class="level-card" data-level="5">
+                        <div class="level-number" style="background-color: #3b82f6;">5</div>
+                        <h4>Transformación</h4>
+                        <p>Modelo de negocio nativo digital. Ecosistema completamente conectado.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Evaluation Page -->
+    <div id="evaluationPage" class="page">
+        <div class="container">
+            <div class="evaluation-header">
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                    <span id="progressText" class="progress-text">Dimensión 1 de 6</span>
+                </div>
+            </div>
+
+            <div class="evaluation-content">
+                <div id="dimensionInfo" class="dimension-info">
+                    <div class="dimension-icon">🎯</div>
+                    <h2 id="dimensionTitle">Estrategia Digital</h2>
+                    <p id="dimensionDescription">¿Existe una visión clara de cómo la tecnología crea ventaja competitiva?</p>
+                </div>
+
+                <form id="evaluationForm" class="evaluation-form">
+                    <div id="questionsContainer" class="questions-container">
+                        <!-- Questions will be dynamically populated -->
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" id="prevBtn" class="btn btn--outline" disabled>Anterior</button>
+                        <button type="button" id="nextBtn" class="btn btn--primary">Siguiente</button>
+                        <button type="submit" id="submitBtn" class="btn btn--primary" style="display: none;">Ver Resultados</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Page -->
+    <div id="resultsPage" class="page">
+        <div class="container">
+            <div class="results-header">
+                <h1>Resultados de su Evaluación</h1>
+                <div id="overallScore" class="overall-score">
+                    <div class="score-circle">
+                        <span id="overallLevel" class="score-number">3.2</span>
+                        <span class="score-label">Nivel Promedio</span>
+                    </div>
+                    <div class="score-info">
+                        <h3 id="overallLevelName">Integración</h3>
+                        <p id="overallLevelDescription">Sus sistemas están conectados y comparten datos entre departamentos.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-content">
+                <div class="results-grid">
+                    <div class="chart-section">
+                        <h3>Análisis por Dimensiones</h3>
+                        <div class="chart-container" style="position: relative; height: 400px;">
+                            <canvas id="radarChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="scores-section">
+                        <h3>Puntuaciones Detalladas</h3>
+                        <div id="dimensionScores" class="dimension-scores">
+                            <!-- Scores will be dynamically populated -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analysis-section">
+                    <h3>Análisis Personalizado</h3>
+                    <div id="analysisContent" class="analysis-content">
+                        <!-- Analysis will be dynamically populated -->
+                    </div>
+                </div>
+
+                <div class="action-plan-section">
+                    <h3>Plan de Acción Recomendado</h3>
+                    <div id="actionPlanContent" class="action-plan-content">
+                        <!-- Action plan will be dynamically populated -->
+                    </div>
+                </div>
+
+                <div class="results-actions">
+                    <button id="downloadPdfBtn" class="btn btn--primary btn--lg">📄 Descargar Informe PDF</button>
+                    <button id="restartBtn" class="btn btn--outline">🔄 Nueva Evaluación</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
